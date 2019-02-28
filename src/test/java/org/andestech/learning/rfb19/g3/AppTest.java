@@ -8,6 +8,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.testng.Assert.assertTrue;
 
 public class AppTest
@@ -23,23 +27,73 @@ public class AppTest
     }
 
     @Test
-    public void testCaseChrome01()
+    public void testCaseChrome01() throws InterruptedException
     {
         wd = new ChromeDriver();
         wd.get("http://google.com");
 
 
+       // 1.
 
-        WebElement element = wd.findElement(By.name("q"));
-        System.out.println(element);
+//        WebElement element = wd.findElement(By.name("q"));
+//        System.out.println(element);
+//        element.sendKeys("кредит");
+//
+//
+//        WebElement element2 = wd.findElement(By.name("btnK"));
+//        System.out.println(element2);
+//        element2.click();
+
+      //2.
+
+//        WebElement element = wd.findElement(By.cssSelector("[name=q]"));
+////        element.sendKeys("кредит");
+////        element.submit();
+////
+////        Thread.sleep(3000);
+
+      //3
+//        wd.findElement(By.xpath("//*[@name='q']")).sendKeys("debit");
+//        wd.findElement(By.name("btnK")).click();
+//        Thread.sleep(3000);
 
 
-        WebElement element2 = wd.findElement(By.name("btnK"));
-        System.out.println(element2);
+      //4
+        WebElement el = wd.findElement(By.xpath("//*[@name='q']"));
+        el.sendKeys("debit");
+
+        wd.findElement(By.name("btnK")).click();
+       // Thread.sleep(3000);
+
+        List<WebElement> elements = wd.findElements(By.cssSelector(".srg .g"));
+        List<String> webs = new ArrayList<>();
+
+        for(WebElement element: elements)
+        {
+            WebElement link = element.findElement(By.cssSelector("a"));
+            webs.add(link.getAttribute("href"));
+        }
+
+        //Thread.sleep(3000);
+
+        int N = 5;
+        for(int i =0; i<5; i++)
+        {
+            WebElement el3 = wd.findElement(By.id("pnnext"));
+            el3.click();
+
+            elements.addAll(wd.findElements(By.cssSelector(".srg .g")));
+
+        }
+
+//
+//        for(WebElement element: elements)
+//        {
+//            WebElement link = element.findElement(By.cssSelector("a"));
+//            System.out.println(link.getAttribute("href"));
+//        }
 
 
-
-        assertTrue( true );
     }
 
 
