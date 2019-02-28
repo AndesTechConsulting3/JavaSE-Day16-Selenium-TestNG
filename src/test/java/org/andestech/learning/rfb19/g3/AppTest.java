@@ -74,24 +74,28 @@ public class AppTest
             webs.add(link.getAttribute("href"));
         }
 
+
         //Thread.sleep(3000);
 
         int N = 5;
         for(int i =0; i<5; i++)
         {
-            WebElement el3 = wd.findElement(By.id("pnnext"));
-            el3.click();
-
-            elements.addAll(wd.findElements(By.cssSelector(".srg .g")));
+            wd.findElement(By.id("pnnext")).click();
+            elements = wd.findElements(By.cssSelector(".srg .g"));
+            for(WebElement element: elements)
+            {
+                WebElement link = element.findElement(By.cssSelector("a"));
+                webs.add(link.getAttribute("href"));
+            }
 
         }
 
-//
-//        for(WebElement element: elements)
-//        {
-//            WebElement link = element.findElement(By.cssSelector("a"));
-//            System.out.println(link.getAttribute("href"));
-//        }
+        int j=0;
+        for(String web: webs)
+        {
+            System.out.printf("%2d --> %s\n", j, web);
+            j++;
+        }
 
 
     }
